@@ -1,4 +1,3 @@
-from config import *
 from datetime import datetime
 from flask import Flask, jsonify
 from flask_cors import CORS
@@ -26,4 +25,4 @@ def home():
 
 if __name__ == "__main__":
     from waitress import serve
-    serve(app, host=host, port=port)
+    serve(app, port=6969)
