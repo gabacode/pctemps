@@ -10,6 +10,10 @@ HTTP server built with Flask to monitor your PC's temperatures.
 - [lm-sensors](https://packages.debian.org/sid/lm-sensors)
 - [Python3](https://www.python.org/downloads/), pip, and the modules referred inside the [requirements.txt](https://github.com/gabacode/pctemps/blob/main/server/Linux/requirements.txt) file.
 
+## Instructions
+- Install the requirements with `pip install -r requirements.txt`
+- Run the server and visit http://localhost:6969 or your local IP address to get the API response.
+
 ## Notes
 The server spins on port 6969 by default, but you can change it inside the scripts.  
 Open the firewall port in order to share the web server with other IP addresses on your LAN.
