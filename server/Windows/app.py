@@ -13,11 +13,11 @@ def check():
     w = wmi.WMI(namespace="root\OpenHardwareMonitor")
     temperature_infos = w.Sensor()
     data.clear()
-    data.append({'Name': "Time", 'Value': datetime.now()})
     for sensor in temperature_infos:
         if sensor.SensorType == u'Temperature':
             data.append({'Name': sensor.Name, 'Value': sensor.Value})
     data.sort(key=lambda x: x['Name'])
+    data.append({'Name': "Time", 'Value': datetime.now()})
     return jsonify(data)
 
 @app.route("/")

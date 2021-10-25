@@ -1,4 +1,3 @@
-import time
 from datetime import datetime
 from flask import Flask, jsonify
 from flask_cors import CORS
@@ -11,7 +10,6 @@ data = []
 def check():
     sensors.init()
     data.clear()
-    data.append({'Name': "Time", 'Value': datetime.now()})
     for chip in sensors.iter_detected_chips():
         for feature in chip:
             if(feature.label == 'SYSTIN'):
@@ -25,6 +23,7 @@ def check():
             if(feature.label == 'fan2'):
                 data.append({'Name': "fan2", 'Value': feature.get_value()})
     data.sort(key=lambda x: x['Name'])
+    data.append({'Name': "Time", 'Value': datetime.now()})
     sensors.cleanup()
     return jsonify(data)
 
