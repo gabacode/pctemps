@@ -1,7 +1,8 @@
 from datetime import datetime
 from flask import Flask, jsonify
 from flask_cors import CORS
-import pythoncom, wmi
+import pythoncom
+import wmi
 
 app = Flask(__name__)
 CORS(app)
@@ -14,7 +15,7 @@ def check():
     data.clear()
     data.append({'Name': "Time", 'Value': datetime.now()})
     for sensor in temperature_infos:
-        if sensor.SensorType==u'Temperature':
+        if sensor.SensorType == u'Temperature':
             data.append({'Name': sensor.Name, 'Value': sensor.Value})
     data.sort(key=lambda x: x['Name'])
     return jsonify(data)
