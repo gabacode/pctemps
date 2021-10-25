@@ -1,6 +1,6 @@
 # pctemps
 
-HTTP server built with Flask to monitor your PC's temperatures. (Windows only)
+HTTP server built with Flask to monitor your PC's temperatures.
 
 Requirements:  
-- [OpenHardwareMonitor](https://openhardwaremonitor.org/)
+- [OpenHardwareMonitor](https://openhardwaremonitor.org/) (for the Windows version)
