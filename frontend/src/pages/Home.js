@@ -29,7 +29,13 @@ export default function Home() {
   return (
     !loading?
       <pre>
-        {JSON.stringify(data, null, 4)}
+        {
+          data.filter(x => (x.Name).includes('GPU') || (x.Name).includes('Package')).map(single => (
+            <h1>
+              {single.Name}: {single.Value}°C
+            </h1>
+          ))
+        }
       </pre>
     :
       <pre>
