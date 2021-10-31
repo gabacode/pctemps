@@ -2,6 +2,8 @@
 
 HTTP server built with Flask to monitor your PC's temperatures.
 
+![preview](https://user-images.githubusercontent.com/38985346/139605334-e00fa7cd-9125-41a4-b404-8ebc89c84a45.png)
+
 ## Requirements (Windows):  
 - [OpenHardwareMonitor](https://openhardwaremonitor.org/)
 - [Python3](https://www.python.org/downloads/), pip, and the modules referred inside the [requirements.txt](https://github.com/gabacode/pctemps/blob/main/server/Windows/requirements.txt) file.
