@@ -97,7 +97,16 @@ export default function Home() {
                   needleColor='#eee'
                 />
                 <code>
-                  {single.Name}: {single.Value > 80 ? <span style={{color:'red'}}>{single.Value}°C</span> : <span>{single.Value}°C</span>}
+                  {single.Name}: 
+                  {single.Value > 80 ? 
+                    <span style={{color:'red'}}>
+                      {parseFloat(single.Value).toFixed(0)}°C
+                    </span> 
+                  : 
+                    <span>
+                      {parseFloat(single.Value).toFixed(0)}°C
+                    </span>
+                  }
                 </code>
               </div>
             ))
