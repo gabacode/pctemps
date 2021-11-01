@@ -4,6 +4,7 @@ import ReactSpeedometer from "react-d3-speedometer"
 
 import Open from '../assets/menu.svg';
 import Close from '../assets/cross.svg';
+import Reload from '../assets/reload.svg';
 
 export default function Home() {
 
@@ -66,6 +67,7 @@ export default function Home() {
     <>
       <Header>
           <Icon onClick={() => setToggle(!toggle)} src={toggle? Close : Open}/>
+          <Icon onClick={() => window.location.reload(false)} src={Reload}/>
       </Header>
       {
         toggle?
