@@ -63,7 +63,6 @@ export default function Home() {
 }
 
   return (
-    !loading?
     <>
       <Header>
           <Icon onClick={() => setToggle(!toggle)} src={toggle? Close : Open}/>
@@ -83,46 +82,49 @@ export default function Home() {
           </Modal>
         : null
       }
-      <div className='center'>
-        <div className='row'>
-          {
-            data.filter(x => (x.Name).includes('GPU Core') || (x.Name).includes('CPU Package')).map((single, i) => (
-              <div className='col-12 col-md-6' key={i}>
-                <ReactSpeedometer
-                  maxValue={100}
-                  value={single.Value}
-                  segments={5}
-                  startColor='green'
-                  endColor='red'
-                  needleColor='#eee'
-                />
-                <code>
-                  {single.Name}: 
-                  {single.Value > 80 ? 
-                    <span style={{color:'red'}}>
-                      {parseFloat(single.Value).toFixed(0)}°C
-                    </span> 
-                  : 
-                    <span>
-                      {parseFloat(single.Value).toFixed(0)}°C
-                    </span>
-                  }
-                </code>
-              </div>
-            ))
-          }
+      {
+        !loading?
+          <div className='center'>
+            <div className='row'>
+              {
+                data.filter(x => (x.Name).includes('GPU Core') || (x.Name).includes('CPU Package')).map((single, i) => (
+                  <div className='col-12 col-md-6' key={i}>
+                    <ReactSpeedometer
+                      maxValue={100}
+                      value={single.Value}
+                      segments={5}
+                      startColor='green'
+                      endColor='red'
+                      needleColor='#eee'
+                    />
+                    <code>
+                      {single.Name}: 
+                      {single.Value > 80 ? 
+                        <span style={{color:'red'}}>
+                          {parseFloat(single.Value).toFixed(0)}°C
+                        </span> 
+                      : 
+                        <span>
+                          {parseFloat(single.Value).toFixed(0)}°C
+                        </span>
+                      }
+                    </code>
+                  </div>
+                ))
+              }
+            </div>
+            <small style={{position:'absolute',bottom:'0'}}>
+              {status === 200 ? `Connected to: ${target}` : status.toString()}
+            </small>
+          </div>
+      :
+        <div className='center'>
+          <code>
+            Loading...
+          </code>
         </div>
-        <small style={{position:'absolute',bottom:'10px'}}>
-          {status === 200 ? `Connected to: ${target}` : status.toString()}
-        </small>
-      </div>
+        }
     </>
-    :
-      <div className='center'>
-        <code>
-          Loading...
-        </code>
-      </div>
   );
 }
 
