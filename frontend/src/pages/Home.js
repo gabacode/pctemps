@@ -12,6 +12,7 @@ export default function Home() {
   const [toggle, setToggle] = useState(false)
   const [data, setData] = useState();
   const [status, setStatus] = useState(null);
+  const [loadingStatus, setLoadingStatus] = useState("Loading...")
 
   const [host, setHost] = useState({
     url: "http://localhost",
@@ -42,6 +43,8 @@ export default function Home() {
         setLoading(false)
       })
       .catch((e) => {
+        setLoading(true)
+        setLoadingStatus(`Check connection to ${target} <br> ${e}`)
         setStatus(e)
       });
     };
@@ -120,7 +123,7 @@ export default function Home() {
       :
         <div className='center'>
           <code>
-            Loading...
+            <div style={{textAlign:'center'}} dangerouslySetInnerHTML={{__html: loadingStatus}} />
           </code>
         </div>
         }
