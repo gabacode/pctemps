@@ -24,17 +24,25 @@ export default function Home() {
 
   var target = host.url+":"+host.port
 
+  const handleErrors = (res) => {
+    if (!res.ok) {
+        throw Error(res.status);
+    }
+    setStatus(res.status)
+    return res.json();
+  }
+
   useEffect(() => {
     const fetchData = async () => {
-      await fetch(target).then((res) => {
-        setStatus(res.status)
-        return res.json()
-      })
+      await fetch(target)
+      .then(handleErrors)
       .then((res) => {
         setData(res)
         setLoading(false)
       })
-      .catch((e) => console.error(e));
+      .catch((e) => {
+        setStatus(e)
+      });
     };
 
     const timer = setTimeout(() => {
@@ -65,10 +73,10 @@ export default function Home() {
             <form style={{marginTop: '25px'}} onSubmit={handleSubmit}>
               <code>Set host and port number</code>
               <div style={{marginTop:'15px',textAlign:'center'}}>
-                <input style={{width:'60%'}} value={form.url}  onChange={(e) => sendForm({...form, url: e.target.value})} />
-                <input style={{width:'20%'}} value={form.port} onChange={(e) => sendForm({...form, port: e.target.value})} />
+                <input type='url' style={{width:'60%'}} value={form.url}  onChange={(e) => sendForm({...form, url: e.target.value})} />
+                <input type='number' style={{width:'20%'}} value={form.port} onChange={(e) => sendForm({...form, port: e.target.value})} />
               </div>
-              <Button type="submit" value="Submit">OK</Button>
+              <Button type='submit' value='Submit'>OK</Button>
             </form>
           </Modal>
         : null
@@ -76,8 +84,8 @@ export default function Home() {
       <div className='center'>
         <div className='row'>
           {
-            data.filter(x => (x.Name).includes('GPU Core') || (x.Name).includes('CPU Package')).map(single => (
-              <div className='col-12 col-md-6'>
+            data.filter(x => (x.Name).includes('GPU Core') || (x.Name).includes('CPU Package')).map((single, i) => (
+              <div className='col-12 col-md-6' key={i}>
                 <ReactSpeedometer
                   maxValue={100}
                   value={single.Value}
@@ -93,7 +101,9 @@ export default function Home() {
             ))
           }
         </div>
-        <small style={{position:'absolute',bottom:'10px'}}>{status === 200 ? `Connected on: ${target}` : "ERROR"}</small>
+        <small style={{position:'absolute',bottom:'10px'}}>
+          {status === 200 ? `Connected to: ${target}` : status.toString()}
+        </small>
       </div>
     </>
     :
